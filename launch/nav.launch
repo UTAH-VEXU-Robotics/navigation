@@ -1,0 +1,9 @@
+<launch>
+
+  <arg name="map_file" default="$(find utah_navigation)maps/map.yaml"/>
+
+  <!-- Run the map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+  <node pkg="tf" type="static_transform_publisher" name="omni3_broadcaster" args="-0.0 -0.0 -0.0 0 -0.0 0 map world 10" />
+
+</launch>
