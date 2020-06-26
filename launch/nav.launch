@@ -2,6 +2,13 @@
   <master auto="start" />
 
   <arg name="map_file" default="$(find utah_navigation)/maps/changeUp.yaml"/>
+  <!--<arg name="model" default="$(find gazeboSimulation)/urdf/robot.urdf.xacro"/>
+  <! convert urdf.xacro to just urdf>
+  <param name="robot_description2" command="$(find xacro)/xacro.py $(arg model)" />
+
+  <arg name="rvizconfig" default="$(find utah_navigation)/rviz/nav.rviz" />
+  <node name="rviz2" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />-->
+
 
   <!-- Run the map server -->
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
@@ -11,7 +18,11 @@
     <rosparam file="$(find utah_navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
     <rosparam file="$(find utah_navigation)/config/local_costmap_params.yaml" command="load" />
     <rosparam file="$(find utah_navigation)/config/global_costmap_params.yaml" command="load" />
-    <rosparam file="$(find utah_navigation)/config/base_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find utah_navigation)/config/teb_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find utah_navigation)/config/move_base_params.yaml" command="load" />
+    <rosparam file="$(find utah_navigation)/config/global_planner_params.yaml" command="load" />
+    <rosparam file="$(find utah_navigation)/config/navfn_global_planner_params.yaml" command="load" />
+    <!--<param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />-->
   </node>
 
   <node pkg="tf" type="static_transform_publisher" name="map_world_broadcaster" args="-0.0 -0.0 -0.0 0 -0.0 0 map world 10" />
