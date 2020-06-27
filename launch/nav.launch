@@ -12,6 +12,9 @@
     <rosparam file="$(find utah_navigation)/config/local_costmap_params.yaml" command="load" />
     <rosparam file="$(find utah_navigation)/config/global_costmap_params.yaml" command="load" />
     <rosparam file="$(find utah_navigation)/config/base_local_planner_params.yaml" command="load" />
+
+    <remap from="/cmd_vel" to="/robot_diff_drive_controller/cmd_vel"/>
+
   </node>
 
   <node pkg="tf" type="static_transform_publisher" name="map_world_broadcaster" args="-0.0 -0.0 -0.0 0 -0.0 0 map world 10" />
