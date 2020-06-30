@@ -22,7 +22,7 @@
     <rosparam file="$(find utah_navigation)/config/move_base_params.yaml" command="load" />
     <rosparam file="$(find utah_navigation)/config/global_planner_params.yaml" command="load" />
     <rosparam file="$(find utah_navigation)/config/navfn_global_planner_params.yaml" command="load" />
-    <!--<param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />-->
+    <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
     <remap from="/cmd_vel" to="/robot_diff_drive_controller/cmd_vel"/>
   </node>
 
