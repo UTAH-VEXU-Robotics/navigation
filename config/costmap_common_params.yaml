@@ -4,7 +4,7 @@ raytrace_range: 3.0
 # robot_radius: 0.20  # distance a circular robot should be clear of the obstacle (kobuki: 0.18)
 footprint: [[0.14, 0.12], [-0.14, 0.12],[-0.14, -0.12],[0.14, -0.12]]  # if the robot is not circular
 #robot_radius: ir_of_robot
-inflation_radius: 0.01
+inflation_radius: 0.3
 
 observation_sources: laser_scan_sensor
 
