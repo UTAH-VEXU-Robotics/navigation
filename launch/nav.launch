@@ -34,5 +34,6 @@
     <param name="visualization_marker" value="/simulation_robot/visualization_marker" />
   </node>-->
 
+  <include file="$(find driver)/launch/driver.launch"/>
 
 </launch>
