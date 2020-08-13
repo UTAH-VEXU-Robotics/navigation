@@ -1,6 +1,6 @@
 TebLocalPlannerROS:
 
-  odom_topic: odom
+  odom_topic: robot_diff_drive_controller/odom
   map_frame: /map
 
   # Trajectory
@@ -18,9 +18,9 @@ TebLocalPlannerROS:
   max_vel_x_backwards: 1.5
   # ~about 2 seconds for a full turn
   max_vel_theta: 6.28
-  acc_lim_x: 3
-  acc_lim_theta: 12.56
-  min_turning_radius: 0.01
+  acc_lim_x: .75
+  acc_lim_theta: 3.14
+  min_turning_radius: 0.005
   footprint_model: # types: "point", "circular", "two_circles", "line", "polygon"
     type: "two_circles"
     radius: 0.9 # for type "circular"
@@ -32,16 +32,15 @@ TebLocalPlannerROS:
     rear_radius: 0.178 # for type "two_circles"
     vertices: [ [0.25, -0.05], [0.18, -0.05], [0.18, -0.18], [-0.19, -0.18], [-0.25, 0], [-0.19, 0.18], [0.18, 0.18], [0.18, 0.05], [0.25, 0.05] ] # for type "polygon"
 
-      # GoalTolerance
-
+  # GoalTolerance
   xy_goal_tolerance: 0.01
   yaw_goal_tolerance: 0.1
   # super cool
   free_goal_vel: False
 
   # Obstacles
-  min_obstacle_dist: 0.1
-  inflation_dist: 0.2
+  min_obstacle_dist: 0.01
+  inflation_dist: 0.02
   include_costmap_obstacles: False
   costmap_obstacles_behind_robot_dist: 1.0
   obstacle_poses_affected: 30
@@ -50,7 +49,7 @@ TebLocalPlannerROS:
   # costmap_converter_rate: 5
 
   # Optimization
-  no_inner_iterations: 5
+  no_inner_iterations: 10
   no_outer_iterations: 4
   optimization_activate: True
   optimization_verbose: False
@@ -58,8 +57,8 @@ TebLocalPlannerROS:
   # weight_viapoint: 0
   weight_max_vel_x: 1.5
   weight_max_vel_theta: 6.28
-  weight_acc_lim_x: 3
-  weight_acc_lim_theta: 12.56
+  weight_acc_lim_x: .75
+  weight_acc_lim_theta: 3.14
   weight_kinematics_nh: 1000
   weight_kinematics_forward_drive: 0.01
   weight_kinematics_turning_radius: 0.01
