@@ -12,10 +12,14 @@ find_package(catkin REQUIRED COMPONENTS
         rospy
         std_msgs
         sensor_msgs
+        move_base
+        move_base_msgs
+        actionlib
+        actionlib_msgs
         )
 
 ## System dependencies are found with CMake's conventions
-find_package(Boost REQUIRED COMPONENTS system)
+#find_package(Boost REQUIRED COMPONENTS system)
 
 ###########
 ## Build ##
@@ -42,5 +46,8 @@ add_executable(pointcloud_converter src/converter.cpp)
 target_link_libraries(pointcloud_converter ${catkin_LIBRARIES})
 #add_dependencies(pointcloud_converter roscpp)
 
+add_executable(move_base_client src/MoveBaseClient.cpp)
+target_link_libraries(move_base_client ${catkin_LIBRARIES})
+#add_dependencies(move_base_client roscpp)
 
 
