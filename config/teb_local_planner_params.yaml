@@ -1,15 +1,16 @@
 TebLocalPlannerROS:
 
+
   # Misc
   odom_topic: robot_diff_drive_controller/odom
   map_frame: /map
 
 
   # Robot Kinematics
-  acc_lim_x: .75
+  acc_lim_x: .5
   max_vel_x: 1.5
   max_vel_x_backwards: 1.5
-  acc_lim_theta: 3.14
+  acc_lim_theta: 1.57
   max_vel_theta: 6.28 # ~about 2 seconds for a full turn
   min_turning_radius: 0.0
   wheelbase: .2 # The distance between the rear axle and the front axle.
@@ -24,8 +25,8 @@ TebLocalPlannerROS:
 
 
   # Goal Tolerance
-  xy_goal_tolerance: .05 # 0.2
-  yaw_goal_tolerance: .05 # .2
+  xy_goal_tolerance: .1 # 0.2
+  yaw_goal_tolerance: .2 # .2
   free_goal_vel: False # Remove the goal velocity constraint such that the robot can arrive at the goal with maximum speed
 
 

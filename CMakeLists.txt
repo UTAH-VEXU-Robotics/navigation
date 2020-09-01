@@ -7,7 +7,15 @@ project(navigation)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED)
+find_package(catkin REQUIRED COMPONENTS
+        roscpp
+        rospy
+        std_msgs
+        sensor_msgs
+        )
+
+## System dependencies are found with CMake's conventions
+find_package(Boost REQUIRED COMPONENTS system)
 
 ###########
 ## Build ##
@@ -30,9 +38,9 @@ catkin_install_python(PROGRAMS
         )
 
 
-#add_executable(utah_navigation src/tf_broadcast.cpp)
-#target_link_libraries(utah_navigation ${catkin_LIBRARIES})
-#add_dependencies(utah_navigation roscpp)
+add_executable(pointcloud_converter src/converter.cpp)
+target_link_libraries(pointcloud_converter ${catkin_LIBRARIES})
+#add_dependencies(pointcloud_converter roscpp)
 
 
 
