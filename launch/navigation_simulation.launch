@@ -1,8 +1,0 @@
-<launch>
-  <arg name="rvizconfig" default="$(find navigation)/rviz/navigation.rviz" />
-
-  <include file="$(find simulation)/launch/changeup.launch">
-    <arg name="rvizconfig" value="$(arg rvizconfig)" />
-  </include>
-
-</launch>
