@@ -22,19 +22,20 @@ void doneCallback(const actionlib::SimpleClientGoalState & state, const move_bas
   std::cout << "Done Callback\n";
 }
 
-
-
-int main(int argc, char** argv)
-{
-  ros::init(argc, argv, "move_base_client");
-  ros::NodeHandle n;
+void moveBaseCallback(const geometry_msgs::PoseStamped::ConstPtr& pose){
 
   Client client( "move_base", true); // true -> don't need ros::spin()
-  client.waitForServer();
 
   if(client.isServerConnected()){
     std::cout << "MoveBaseSimpleActionClient has connected to move_base server" << "\n";
   }
+
+  client.waitForServer();
+
+  boost::function<void (const actionlib::SimpleClientGoalState &, const move_base_msgs::MoveBaseResultConstPtr &)>
+      simpleDoneCallback = doneCallback;
+  boost::function<void ()> simpleActiveCallback = activeCallback;
+  boost::function<void (const move_base_msgs::MoveBaseFeedbackConstPtr &)> simpleFeedbackCallback = feedbackCallback;
 
   auto goal = move_base_msgs::MoveBaseGoal();
   goal.target_pose.header.stamp = ros::Time::now();
@@ -48,14 +49,45 @@ int main(int argc, char** argv)
   goal.target_pose.pose.orientation.z = .97;
   goal.target_pose.pose.orientation.w = .23;
 
+  client.sendGoal(goal, simpleDoneCallback, simpleActiveCallback, simpleFeedbackCallback);
+
+  client.waitForResult();
+}
+
+int main(int argc, char** argv)
+{
+  ros::init(argc, argv, "move_base_client");
+  ros::NodeHandle n;
+
+  ROS_INFO_STREAM("starting move_base_client");
+  ros::Subscriber sub = n.subscribe("field/move_base", 50, moveBaseCallback);
+
+  Client client( "move_base", true); // true -> don't need ros::spin()
+
+  if(client.isServerConnected()){
+    std::cout << "MoveBaseSimpleActionClient has connected to move_base server" << "\n";
+  }
+
+  client.waitForServer();
+
   boost::function<void (const actionlib::SimpleClientGoalState &, const move_base_msgs::MoveBaseResultConstPtr &)>
       simpleDoneCallback = doneCallback;
   boost::function<void ()> simpleActiveCallback = activeCallback;
   boost::function<void (const move_base_msgs::MoveBaseFeedbackConstPtr &)> simpleFeedbackCallback = feedbackCallback;
 
+  auto goal = move_base_msgs::MoveBaseGoal();
+  goal.target_pose.header.stamp = ros::Time::now();
+  goal.target_pose.header.frame_id = "world";
+  goal.target_pose.pose.position.x = -.513;
+  goal.target_pose.pose.position.y = .7332;
+  goal.target_pose.pose.position.z = 0.0;
+
+  goal.target_pose.pose.orientation.x = 0.0;
+  goal.target_pose.pose.orientation.y = 0.0;
+  goal.target_pose.pose.orientation.z = .97;
+  goal.target_pose.pose.orientation.w = .23;
+
   client.sendGoal(goal, simpleDoneCallback, simpleActiveCallback, simpleFeedbackCallback);
 
   client.waitForResult();
-
-  return 0;
 }

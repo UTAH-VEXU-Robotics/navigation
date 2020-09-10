@@ -21,6 +21,23 @@ find_package(catkin REQUIRED COMPONENTS
 ## System dependencies are found with CMake's conventions
 #find_package(Boost REQUIRED COMPONENTS system)
 
+## Generate messages in the 'msg' folder
+add_message_files(
+        FILES
+        Action.msg
+        ChangeUpField.msg
+        Field.msg
+        Model.msg
+        Type.msg
+        Zone.msg
+)
+
+## Generate added messages and services with any dependencies listed here
+generate_messages(
+        DEPENDENCIES
+        std_msgs geometry_msgs # Or other packages containing msgs
+)
+
 ###########
 ## Build ##
 ###########
@@ -49,5 +66,13 @@ target_link_libraries(pointcloud_converter ${catkin_LIBRARIES})
 add_executable(move_base_client src/MoveBaseClient.cpp)
 target_link_libraries(move_base_client ${catkin_LIBRARIES})
 #add_dependencies(move_base_client roscpp)
+
+add_executable(robot_controller src/RobotController.cpp )
+target_link_libraries(robot_controller ${catkin_LIBRARIES})
+#add_dependencies(robot_controller roscpp)
+
+add_executable(field_analyzer src/FieldAnalyzer.cpp )
+target_link_libraries(field_analyzer ${catkin_LIBRARIES})
+#add_dependencies(field_analyzer roscpp)
 
 
