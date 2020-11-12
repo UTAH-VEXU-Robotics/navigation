@@ -1,8 +1,10 @@
 <launch>
-  <arg name="rvizconfig" default="$(find navigation)/rviz/navigation.rviz" />
 
-  <include file="$(find simulation)/launch/changeup.launch">
-    <arg name="rvizconfig" value="$(arg rvizconfig)" />
+  <include file="$(find navigation)/launch/robot.launch">
+    <arg name="world_name" default="$(find simulation)/worlds/games/change_up.world"/>
+    <arg name="rvizconfig" default="$(find navigation)/rviz/navigation.rviz" />
   </include>
+
+  <include file="$(find navigation)/launch/navigation.launch"/>
 
 </launch>
