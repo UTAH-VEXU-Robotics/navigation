@@ -32,3 +32,4 @@ values with qt stuff
 thing
 - send data to other robot about
 odometry
+- check out https://github.com/GuiRitter/OpenBase and https://github.com/YugAjmera/navros_pkg
